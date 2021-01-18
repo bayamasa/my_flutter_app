@@ -69,6 +69,8 @@ class _MyHomePageState extends State<MyHomePage> {
   String name;
   final myController = TextEditingController();
 
+  final items = List<String>.generate(10000, (i) => "Item $i");
+
   @override
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called, for instance as done
@@ -89,29 +91,13 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: Container(
         width: double.infinity,
-        child: Column(
-            children: [
-              TextField(
-                decoration: InputDecoration(
-                  hintText: '名前',
-                ),
-              ),
-              TextField(
-                controller: myController,
-                decoration: InputDecoration(
-                  hintText: '趣味',
-                ),
-                onChanged: (text){
-                  name = text;
-                },
-              ),
-              RaisedButton(
-                child: Text('登録'),
-                onPressed: () {
-                  final hobbyText = myController.text;
-                },
-              ),
-            ],
+        child: ListView.builder(
+          itemCount: items.length,
+          itemBuilder: (context, index) {
+            return ListTile(
+              title: Text('${items[index]}'),
+            );
+          },
         ),
       ),
     );
