@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'next_page.dart';
+
 void main() {
   runApp(MyApp());
 }
@@ -63,6 +65,10 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
+  final myFocusNode = FocusNode();
+  String name;
+  final myController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called, for instance as done
@@ -75,56 +81,39 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
-        title: Text('hello world!!s'),
+        title: Text('hello world'),
         actions: [
           Icon(Icons.add),
           Icon(Icons.share),
         ],
       ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: Container(
-          color: Colors.red,
-          height: 400,
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Row(
-              // Column is also a layout widget. It takes a list of children and
-              // arranges them vertically. By default, it sizes itself to fit its
-              // children horizontally, and tries to be as tall as its parent.
-              //
-              // Invoke "debug painting" (press "p" in the console, choose the
-              // "Toggle Debug Paint" action from the Flutter Inspector in Android
-              // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
-              // to see the wireframe for each widget.
-              //
-              // Column has various properties to control how it sizes itself and
-              // how it positions its children. Here we use mainAxisAlignment to
-              // center the children vertically; the main axis here is the vertical
-              // axis because Columns are vertical (the cross axis would be
-              // horizontal).
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: <Widget>[
-                Text(
-                  'this',
+      body: Container(
+        width: double.infinity,
+        child: Column(
+            children: [
+              TextField(
+                decoration: InputDecoration(
+                  hintText: '名前',
                 ),
-                Text(
-                  'is',
+              ),
+              TextField(
+                controller: myController,
+                decoration: InputDecoration(
+                  hintText: '趣味',
                 ),
-                Text(
-                  'test',
-                ),
-              ],
-            ),
-          ),
+                onChanged: (text){
+                  name = text;
+                },
+              ),
+              RaisedButton(
+                child: Text('登録'),
+                onPressed: () {
+                  final hobbyText = myController.text;
+                },
+              ),
+            ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
